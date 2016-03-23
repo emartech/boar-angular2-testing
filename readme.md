@@ -67,6 +67,7 @@ backend
   .whenGET('http://test.me/api/templates/abc123')
   .respondWithSuccess({ _id: 5, name: 'Test template' });
 service.load();
+//backend.flushNext();
 backend.verifyNoPendingRequests();
 ```
 
@@ -84,6 +85,7 @@ backend
   .whenDELETE('http://test.me/api/templates/abc123')
   .respondWithSuccess({ _id: 5, name: 'Test template' });
 service.load();
+//backend.delete();
 backend.verifyNoExpectedRequests();
 ```
 
