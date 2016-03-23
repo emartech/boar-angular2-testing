@@ -51,8 +51,8 @@ export class SyncMockBackend extends MockBackend {
   }
 
 
-  whenDELETE(url: string = null, body: any = null) {
-    const expectation = new Expectation({ url, body, method: RequestMethod.Delete });
+  whenDELETE(url: string = null) {
+    const expectation = new Expectation({ url, method: RequestMethod.Delete });
     this._appendExpectation(expectation);
     return expectation;
   }
