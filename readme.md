@@ -27,7 +27,6 @@ beforEachProvider(() => {
 ```
 
 Manual flush
-
 ---------
 
 ```javascript
