@@ -1,7 +1,9 @@
 import { Response, ResponseOptions, RequestMethod } from 'angular2/http';
 import { MockBackend, MockConnection } from 'angular2/http/testing';
 import { Expectation, IExpectedRequest } from './expectation';
+import { Injectable } from 'angular2/core';
 
+@Injectable()
 export class SyncMockBackend extends MockBackend {
 
   private _expectations: Expectation[] = [];
