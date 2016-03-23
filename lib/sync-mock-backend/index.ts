@@ -22,6 +22,11 @@ export class SyncMockBackend extends MockBackend {
   }
 
 
+  static createWithAutoRespond() {
+    return new SyncMockBackend(new SyncMockBackendOptions({ autoRespond: true }));
+  }
+
+
   get autoRespond() {
     return this._options.autoRespond;
   }
