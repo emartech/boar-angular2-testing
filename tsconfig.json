@@ -13,7 +13,7 @@
         "node_modules",
         "typings/main.d.ts",
         "typings/main",
-        "./client/**/*.spec.ts"
+        "./lib/**/*.spec.ts"
     ],
     "filesGlob": [
         "./lib/**/*.ts",
