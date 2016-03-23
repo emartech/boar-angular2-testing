@@ -4,7 +4,7 @@
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "scripts": {
-    "test": "mocha --require ts-node/register lib/**/*.spec.ts",
+    "test": "mocha --require es6-shim --require es6-promise --require reflect-metadata --require ts-node/register lib/**/*.spec.ts",
     "prepublish": "rimraf dist && tsc",
     "postinstall": "typings install",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
