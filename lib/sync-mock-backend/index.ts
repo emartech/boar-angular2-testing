@@ -1,25 +1,27 @@
 import { Response, ResponseOptions, RequestMethod } from 'angular2/http';
 import { MockBackend, MockConnection } from 'angular2/http/testing';
 import { Expectation, IExpectedRequest } from './expectation';
+import { SyncMockBackendOptions } from './options';
+export { SyncMockBackendOptions } from './options';
 
 export class SyncMockBackend extends MockBackend {
 
   private _expectations: Expectation[] = [];
   private _pendingConnections: MockConnection[] = [];
-  private _autoRespond = false;
+  private _options: SyncMockBackendOptions;
 
-  constructor({ autoRespond = false } = {}) {
+  constructor(options: SyncMockBackendOptions = new SyncMockBackendOptions()) {
     super();
-    this._autoRespond = autoRespond;
+    this._options = options;
     this.connections.subscribe((connection: MockConnection) => {
       this._pendingConnections = this._pendingConnections.concat(connection);
-      if (this._autoRespond) this.flushNext();
+      if (this._options.autoRespond) this.flushNext();
     });
   }
 
 
   get autoRespond() {
-    return this._autoRespond;
+    return this._options.autoRespond;
   }
 
 

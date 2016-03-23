@@ -1,11 +1,11 @@
 import 'rxjs/add/operator/map'
 import { expect } from 'chai';
-import { SyncMockBackend } from './';
+import { SyncMockBackend, SyncMockBackendOptions } from './';
 import { RequestMethod } from 'angular2/http';
 import { Http, Response, ResponseOptions, BaseRequestOptions } from 'angular2/http';
 
-const createModule = (backendOptions: any = {}) => {
-  const backend = new SyncMockBackend(backendOptions);
+const createModule = (syncMockBackendOptions = new SyncMockBackendOptions()) => {
+  const backend = new SyncMockBackend(syncMockBackendOptions);
   const http =  new Http(backend, new BaseRequestOptions());
   return { backend, http };
 };
@@ -15,7 +15,7 @@ describe('Sync Mock Backend', () => {
   describe('with autoRespond', () => {
 
     it('should respond automatically after the connection arrives', () => {
-      const { backend, http } = createModule({ autoRespond: true });
+      const { backend, http } = createModule(new SyncMockBackendOptions({ autoRespond: true }));
       backend.every().respondWithSuccess();
       let called = false;
       http.get('http://fake.me').map((res) => res.json()).subscribe(() => called = true);
@@ -27,7 +27,7 @@ describe('Sync Mock Backend', () => {
   describe('without autoRespond', () => {
 
     it('should not respond automatically if the connection arrives', () => {
-      const { backend, http } = createModule({ autoRespond: false });
+      const { backend, http } = createModule();
       backend.every().respondWithSuccess();
       let called = false;
       http.get('http://fake.me').map((res) => res.json()).subscribe(() => called = true);
@@ -45,7 +45,7 @@ describe('Sync Mock Backend', () => {
 
 
     it('should be true if set via options', () => {
-      const backend = new SyncMockBackend({ autoRespond: true });
+      const backend = new SyncMockBackend(new SyncMockBackendOptions({ autoRespond: true }));
       expect(backend.autoRespond).to.be.true;
     });
 
