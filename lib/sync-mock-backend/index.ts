@@ -3,6 +3,7 @@ import { MockBackend, MockConnection } from 'angular2/http/testing';
 import { Expectation, IExpectedRequest } from './expectation';
 import { SyncMockBackendOptions } from './options';
 export { SyncMockBackendOptions } from './options';
+export { Expectation } from './expectation';
 import { Injectable } from 'angular2/core';
 
 @Injectable()
@@ -24,6 +25,20 @@ export class SyncMockBackend extends MockBackend {
 
   static createWithAutoRespond() {
     return new SyncMockBackend(new SyncMockBackendOptions({ autoRespond: true }));
+  }
+
+
+  static createForExpectations(expectations: Expectation[], options?: SyncMockBackendOptions) {
+    const backend = new SyncMockBackend(new SyncMockBackendOptions(options));
+    expectations.forEach((expectation) => backend.prependWhen(expectation));
+    return backend;
+  }
+
+
+  static createForExpectation(expectation: Expectation, options?: SyncMockBackendOptions) {
+    const backend = new SyncMockBackend(new SyncMockBackendOptions(options));
+    backend.prependWhen(expectation);
+    return backend;
   }
 
 
