@@ -25,14 +25,7 @@ export class SyncMockBackend extends MockBackend {
 
   static createWithAutoRespond(expectation?: Expectation) {
     const backend = new SyncMockBackend(new SyncMockBackendOptions({ autoRespond: true }));
-    if (expectation) backend.prependWhen(expectation);
-    return backend;
-  }
-
-
-  static createForExpectation(expectation: Expectation, options?: SyncMockBackendOptions) {
-    const backend = new SyncMockBackend(new SyncMockBackendOptions(options));
-    backend.prependWhen(expectation);
+    if (expectation) backend.prependExpectation(expectation);
     return backend;
   }
 
@@ -95,6 +88,16 @@ export class SyncMockBackend extends MockBackend {
     const expectation = new Expectation(expectedrequest);
     this._expectations = [expectation].concat(this._expectations);
     return expectation;
+  }
+
+
+  prependExpectation(expectation: Expectation) {
+    this._expectations = [expectation].concat(this._expectations);
+  }
+
+
+  appendExpectation(expectation: Expectation) {
+    this._expectations = this._expectations.concat(expectation);
   }
 
 
