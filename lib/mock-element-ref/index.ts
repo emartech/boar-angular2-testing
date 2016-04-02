@@ -1,4 +1,4 @@
-import { MockClassList } from './mock-class-list.ts';
+import { MockClassList } from './mock-class-list';
 
 export class MockElementRef {
 
