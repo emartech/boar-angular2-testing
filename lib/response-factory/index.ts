@@ -5,7 +5,7 @@ export class ResponseFactory {
   createSuccess({
     status = 200,
     message = {}
-  }) {
+  } = {}) {
     return this._create({ status, message });
   }
 
