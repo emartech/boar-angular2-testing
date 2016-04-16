@@ -1,4 +1,4 @@
-import { Response, ResponseOptions, RequestMethod } from 'angular2/http';
+import { Response, ResponseOptions, RequestMethod, Request } from 'angular2/http';
 import { MockBackend, MockConnection } from 'angular2/http/testing';
 import { Expectation, IExpectedRequest } from './expectation';
 import { SyncMockBackendOptions } from './options';
@@ -12,6 +12,7 @@ export class SyncMockBackend extends MockBackend {
   private _expectations: Expectation[] = [];
   private _pendingConnections: MockConnection[] = [];
   private _options: SyncMockBackendOptions;
+  private _lastRequest: Request;
 
   constructor(options: SyncMockBackendOptions = new SyncMockBackendOptions()) {
     super();
@@ -27,6 +28,11 @@ export class SyncMockBackend extends MockBackend {
     const backend = new SyncMockBackend(new SyncMockBackendOptions({ autoRespond: true }));
     if (expectation) backend.prependExpectation(expectation);
     return backend;
+  }
+
+
+  get lastRequest() {
+    return this._lastRequest;
   }
 
 
@@ -150,7 +156,7 @@ export class SyncMockBackend extends MockBackend {
     if (this._expectations.length === 0) throw this._unexpectedConnectionError(connectionToFlush);
     const nextExpectation = this._expectations[0];
     if (!nextExpectation.match(connectionToFlush)) throw this._unexpectedConnectionError(connectionToFlush);
-
+    this._lastRequest = connectionToFlush.request;
     if (nextExpectation.errorResponse) {
       connectionToFlush.mockError(nextExpectation.errorResponse);
     } else {
