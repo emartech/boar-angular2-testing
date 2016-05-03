@@ -1,5 +1,5 @@
-import { RequestMethod } from 'angular2/http';
-import { MockConnection } from 'angular2/http/testing';
+import { RequestMethod } from '@angular/http';
+import { MockConnection } from '@angular/http/testing';
 
 export interface IExpectedRequest {
   method?: RequestMethod;

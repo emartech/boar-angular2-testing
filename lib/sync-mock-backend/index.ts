@@ -1,10 +1,10 @@
-import { Response, ResponseOptions, RequestMethod, Request } from 'angular2/http';
-import { MockBackend, MockConnection } from 'angular2/http/testing';
+import { Response, ResponseOptions, RequestMethod, Request } from '@angular/http';
+import { MockBackend, MockConnection } from '@angular/http/testing';
 import { Expectation, IExpectedRequest } from './expectation';
 import { SyncMockBackendOptions } from './options';
 export { SyncMockBackendOptions } from './options';
 export { Expectation } from './expectation';
-import { Injectable } from 'angular2/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class SyncMockBackend extends MockBackend {

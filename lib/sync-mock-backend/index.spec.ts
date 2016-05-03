@@ -1,8 +1,8 @@
 import 'rxjs/add/operator/map'
 import { expect } from 'chai';
 import { SyncMockBackend, SyncMockBackendOptions } from './';
-import { RequestMethod } from 'angular2/http';
-import { Http, Response, ResponseOptions, BaseRequestOptions } from 'angular2/http';
+import { RequestMethod } from '@angular/http';
+import { Http, Response, ResponseOptions, BaseRequestOptions } from '@angular/http';
 
 const createModule = (syncMockBackendOptions = new SyncMockBackendOptions()) => {
   const backend = new SyncMockBackend(syncMockBackendOptions);
