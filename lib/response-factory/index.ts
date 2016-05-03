@@ -1,4 +1,4 @@
-import { Response, ResponseOptions } from 'angular2/http';
+import { Response, ResponseOptions } from '@angular/http';
 
 export class ResponseFactory {
 
