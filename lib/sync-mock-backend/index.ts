@@ -160,7 +160,10 @@ export class SyncMockBackend extends MockBackend {
     if (nextExpectation.errorResponse) {
       connectionToFlush.mockError(nextExpectation.errorResponse);
     } else {
-      connectionToFlush.mockRespond(new Response(new ResponseOptions({ body: nextExpectation.response })));
+      connectionToFlush.mockRespond(new Response(new ResponseOptions({
+        body: nextExpectation.response,
+        status: nextExpectation.responseCode
+      })));
     }
     this._pendingConnections = this._pendingConnections.filter(connection => connectionToFlush !== connection);
     this._expectations = this._expectations.filter(expectation => expectation !== nextExpectation);

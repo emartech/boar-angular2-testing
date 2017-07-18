@@ -65,6 +65,30 @@ describe('Sync Mock Backend', () => {
     });
 
 
+    it('should respond with the given error if the url matches and an error was set', () => {
+      const { backend, http } = createModule();
+      const error = new Error('test');
+      const URL = 'http://test.me.org/index.html';
+      backend.whenGET(URL).respondWithError(error);
+      let response: any = null;
+      http.get(URL).map((res) => res.json()).subscribe(() => {}, err => response = err);
+      backend.flushNext();
+      expect(response).to.eql(error);
+    });
+
+
+    it('should respond with the given status code if the url matches', () => {
+      const { backend, http } = createModule();
+      const dummyResponse = { 'yo': 'I am a json from the server ' };
+      const URL = 'http://test.me.org/index.html';
+      backend.whenGET(URL).respondWith({ body: dummyResponse, status: 202 });
+      let status: any = null;
+      http.get(URL).subscribe(r => status = r.status);
+      backend.flushNext();
+      expect(status).to.eql(202);
+    });
+
+
     it(`should thrown an error if the expected url doesn't match`, () => {
       const { backend, http } = createModule();
       backend.whenGET('http://test.me.org/index.html').respondWithSuccess();

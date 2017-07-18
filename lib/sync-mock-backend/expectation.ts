@@ -11,6 +11,7 @@ export class Expectation {
 
   private _expectedRequest: IExpectedRequest;
   private _response: any;
+  private _responseCode: number;
   private _errorResponse: any;
 
   constructor(expectedRequest: IExpectedRequest = {}) {
@@ -23,8 +24,19 @@ export class Expectation {
   }
 
 
+  get responseCode() {
+    return this._responseCode;
+  }
+
+
   get errorResponse() {
     return this._errorResponse;
+  }
+
+
+  respondWith({ body = null, status = 200 }: { body: any, status: number}) {
+    this._response = body;
+    this._responseCode = status;
   }
 
 
@@ -33,7 +45,7 @@ export class Expectation {
   }
 
 
-  respondWithError(error = 'Something went wrong!') {
+  respondWithError(error: any = 'Something went wrong!') {
     this._errorResponse = error;
   }
 
