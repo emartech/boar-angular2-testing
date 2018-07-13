@@ -11,6 +11,11 @@
   "release": {
     "verifyConditions": {
       "path": "./node_modules/semantic-release/dist/lib/plugin-noop.js"
+    },
+    "analyzeCommits": {
+      "releaseRules": [
+        { "type": "chore", "release": "patch" }
+      ]
     }
   },
   "repository": {
