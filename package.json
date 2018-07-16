@@ -11,18 +11,13 @@
   "release": {
     "verifyConditions": {
       "path": "./node_modules/semantic-release/dist/lib/plugin-noop.js"
-    },
-    "analyzeCommits": {
-      "releaseRules": [
-        { "type": "chore", "release": "patch" }
-      ]
     }
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/emartech/boar-angular2-testing.git"
   },
-  "author": "Viktor Somodi <viktor.somodi@emarsys.com>",
+  "author": "Emarsys",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/emartech/boar-angular2-testing/issues"
